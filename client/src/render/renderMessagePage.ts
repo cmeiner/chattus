@@ -1,4 +1,6 @@
-function renderMessagePage(socket : any, joinedRoom : string) {
+import renderRoomPage from "./renderRoomPage"
+
+function renderMessagePage(socket : any, joinedRoom : string, nickname : string) {
     document.body.innerHTML = ""
   
     let roomContainer = document.createElement("div")
@@ -7,6 +9,10 @@ function renderMessagePage(socket : any, joinedRoom : string) {
     let leaveButton = document.createElement("button")
     leaveButton.id = "leaveButton"
     leaveButton.innerHTML = "Lämna rum"
+    leaveButton.addEventListener("click", () => {
+      socket.emit("leave", joinedRoom)
+      renderRoomPage(socket)
+    })
   
     let chatListUl = document.createElement('ul')
     chatListUl.id = "chatListUl"
@@ -32,6 +38,11 @@ function renderMessagePage(socket : any, joinedRoom : string) {
       } else {
         console.log("Du får inte skicka tomma meddelanden!");
       }
+    })
+    chatForm.addEventListener("keyup", (event) => {
+      console.log('hej')
+      socket.emit("typing", `${nickname}` )
+
     })
   
     let sendButton = document.createElement("button")

@@ -1,9 +1,12 @@
 import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, ServerToClientEvents } from "../../types";
+import "./css/messagePage.css";
+import "./css/roomPage.css";
+import "./css/startPage.css";
+import "./css/style.css";
 import renderMessagePage from "./render/renderMessagePage";
 import renderRoomPage from "./render/renderRoomPage";
 import renderStartPage from "./render/renderStartPage";
-import "./style.css";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({"autoConnect": false});
 
@@ -30,17 +33,24 @@ socket.on("roomList", (rooms) => {
   if (rooms.length >= 1) {
     let container = document.getElementById('container')
     let roomListDivHeader = document.createElement("h3")
-  roomListDivHeader.innerText = "Gå med i befintligt rum"
+  roomListDivHeader.innerText = "Join a room"
   container?.prepend(roomListDivHeader)
 
   for (let room of rooms) {
+    let chatLink = document.createElement('li')
+    chatLink.id = "chatLink"
+    chatLink.innerHTML = `${room}`
+    chatLink.addEventListener('click', () => {
+      socket.emit('leave', joinedRoom)
+      socket.emit('join', room)
+    })
     let roomLink = document.createElement('li')
     roomLink.id = "roomLink"
     roomLink.innerHTML = `${room}`
     roomLink.addEventListener("click", () => {
       socket.emit("join", room)
     })
-    document.getElementById('chatListUl')?.append(roomLink)
+    document.getElementById('chatListUl')?.append(chatLink)
     document.getElementById('roomListUL')?.append(roomLink)
     }
     
@@ -51,7 +61,7 @@ socket.on("roomList", (rooms) => {
 socket.on("joined", (room) => {
   console.log("Joined room: ", room)
   joinedRoom = room
-  renderMessagePage(socket, joinedRoom)
+  renderMessagePage(socket, joinedRoom, nickname)
 })
 
 socket.on("message", (message, from) => {
@@ -69,9 +79,9 @@ socket.on("message", (message, from) => {
   window.scrollTo(0, document.body.scrollHeight)
 })
 
-socket.on("connected", (nickname) => {
-  console.log("Connected: ", nickname)
-  nickname = nickname
+socket.on("connected", (userName) => {
+  console.log("Connected: ", userName)
+  nickname = userName
   renderRoomPage(socket)
 })
 

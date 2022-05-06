@@ -1,0 +1,9 @@
+#nputRoomContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    gap: 1em;
+    height: 100vh;
+  }

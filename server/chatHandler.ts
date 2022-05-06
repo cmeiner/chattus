@@ -14,8 +14,18 @@ export default (io: Server, socket: Socket) => {
         if (shouldBroadcastRooms) {
             io.emit("roomList", getRooms(io))
         }
-
+        console.log(`${socket.data.nickname} joined ${room}`)
         socket.emit("joined", room)
+    })
+
+    socket.on("typing", (nickname) => {
+        console.log(`${nickname} is typing`)
+    })
+
+
+    socket.on('leave', (room) => {
+        console.log(`${socket.data.nickname} wants to leave ${room}`)
+        socket.leave(room)
     })
 
     socket.on("message", (message, to) => {

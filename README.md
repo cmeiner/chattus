@@ -1,3 +1,31 @@
+
+[X]
+1.Användaren får börja med att välja ett eget visningsnamn när den besöker sidan.
+
+2.Det ska gå att skapa ett rum (och samtidigt gå med i rummet).
+[X]
+
+3.Det ska gå att lämna ett rum (tomma rum ska automatiskt försvinna).
+[X]
+
+4.Samtliga rum skall vara synligt i en lista.
+[Funkar halvbra]
+
+5.De går att gå med i ett rum genom att klicka på det i listan.
+[X]
+
+6.När en användare går med i ett nytt rum ska befintligt rum lämnas automatiskt.
+[]
+
+7.Användare ska kunna skicka och läsa nya meddelanden i rummet de har gått med i
+[]
+
+8.När en användare håller på att skriva ett meddelande skall det synas för alla andra i rummet.
+
+
+
+
+
 # Socket.io with Typescript
 
 ## Install & Run
