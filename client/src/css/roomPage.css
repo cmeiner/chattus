@@ -1,4 +1,4 @@
-#nputRoomContainer {
+#InputRoomContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,4 +6,9 @@
     width: 100vw;
     gap: 1em;
     height: 100vh;
+  }
+
+  #roomInputHeader {
+      font-size: 6vmin;
+      margin-bottom: 0;
   }

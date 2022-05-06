@@ -39,12 +39,28 @@ function renderMessagePage(socket : any, joinedRoom : string, nickname : string)
         console.log("Du får inte skicka tomma meddelanden!");
       }
     })
-    chatForm.addEventListener("keyup", (event) => {
-      console.log('hej')
+    chatForm.addEventListener("input", (event) => {
       socket.emit("typing", `${nickname}` )
 
     })
-  
+
+    let userIsTypingDiv = document.createElement("div")
+    userIsTypingDiv.id = "userIsTypingDiv"
+
+    let userIsTypingText = document.createElement("p")
+    userIsTypingText.id = "userIsTypingText"
+    
+    userIsTypingDiv.append(userIsTypingText)
+    
+    socket.on('typing', (nickname : string) => {
+      console.log(`${nickname} skriver`)
+      
+      userIsTypingText.innerText = `${nickname} skriver ett meddelande`
+      
+      chatForm.append(userIsTypingDiv)
+
+    })
+      
     let sendButton = document.createElement("button")
     sendButton.innerText = "Skicka"
   

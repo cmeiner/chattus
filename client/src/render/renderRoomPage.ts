@@ -9,15 +9,19 @@ function renderRoomPage(socket : any) {
     roomListUL.id = 'roomListUL'
     
     let roomInputHeader = document.createElement("h3")
+    roomInputHeader.id = 'roomInputHeader'
     roomInputHeader.innerText = "Enter your own room"
   
     let roomForm = document.createElement('form')
     roomForm.id = 'roomForm'
   
     let roomInput = document.createElement("input")
+    roomInput.id = 'nameInput'
+    roomInput.autocomplete = 'off'
   
     let roomInputButton = document.createElement("button")
-    roomInputButton.innerText = "Join"
+    roomInputButton.id = 'nameInputButton'
+    roomInputButton.innerText = "Enter"
     roomForm.addEventListener("submit", (e) => {
       e.preventDefault()
       const room = roomInput.value

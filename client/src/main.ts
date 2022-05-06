@@ -79,6 +79,8 @@ socket.on("message", (message, from) => {
   window.scrollTo(0, document.body.scrollHeight)
 })
 
+
+
 socket.on("connected", (userName) => {
   console.log("Connected: ", userName)
   nickname = userName

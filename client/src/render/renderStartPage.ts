@@ -13,7 +13,7 @@ function renderStartPage(socket : any) {
   
     let nameInputHeader = document.createElement("h3")
     nameInputHeader.id = 'nameInputHeader'
-    nameInputHeader.innerText = "Enter your nickname!"
+    nameInputHeader.innerText = "Enter your nickname"
   
     let nameForm = document.createElement('form')
     nameForm.id = 'nameForm'

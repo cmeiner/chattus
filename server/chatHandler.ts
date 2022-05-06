@@ -18,9 +18,6 @@ export default (io: Server, socket: Socket) => {
         socket.emit("joined", room)
     })
 
-    socket.on("typing", (nickname) => {
-        console.log(`${nickname} is typing`)
-    })
 
 
     socket.on('leave', (room) => {
@@ -36,6 +33,11 @@ export default (io: Server, socket: Socket) => {
         }
 
         io.to(to).emit("message", message, { id: socket.id, nickname: socket.data.nickname })
+    })
+
+
+    socket.on('typing', (nickname) => {
+        io.emit('typing', nickname)
     })
 
 }
