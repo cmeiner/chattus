@@ -1,85 +1,95 @@
 #form {
-    background: rgba(0, 0, 0, 0.15);
-    padding: 0.25rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    height: 3rem;
-    box-sizing: border-box;
-    backdrop-filter: blur(10px);
-  }
-  
-  #input {
-    border: none;
-    padding: 0 1rem;
-    flex-grow: 1;
-    border-radius: 2rem;
-    margin: 0.25rem;
-  }
-  
-  #input:focus {
-    outline: none;
-  }
-  
-  #form>button {
-    background: #333;
-    border: none;
-    padding: 0 1rem;
-    margin: 0.25rem;
-    border-radius: 3px;
-    outline: none;
-    color: #fff;
-  }
-  
-  #messages {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #messages>li {
-    padding: 0.5rem 1rem;
-  }
-  
-  #messages>li:nth-child(odd) {
-    background: blue;
-  }
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 10%;
+  gap: 1rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  width: 100%;
+}
 
-  .displayNone {
-    display: none;
-  }
+#input {
+  border: none;
+  padding: 0 1rem;
+  font-size: 2rem;
+  flex-grow: 1;
+  border-radius: 2rem;
+  margin: 0.25rem;
+  height: 60%;
+}
 
-  #userIsTypingDiv {
-    position: absolute;
-    top: -50%;
-    left: -500;
+#input:focus {
+  outline: none;
+}
 
-  }
+#form > button {
+  background: #333;
+  border: none;
+  height: 3rem;
+  padding: 0 1rem;
+  margin: 0.25rem;
+  border-radius: 3px;
+  outline: none;
+  color: #b9bbbe;
+  font-size: 1.5rem;
+}
 
-  #leaveButton {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3vmin;
-    padding: 2vmin;
-    width: 40%;
-    border-radius: 0.6rem;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.5s;
-    background-color: #b9bbbe;
-    color: #2f3136;
-  }
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  max-height: 80%;
+}
 
-  #leaveButton:hover {
-    transform: scale(1.05);
-    color: white;
-    opacity: 0.2;
-  }
+#messages > li {
+  padding: 0.5rem 1rem;
+}
+
+#messages > li:nth-child(odd) {
+  /* background: rgb(110, 174, 226);*/
+  background-color: #32353b;
+  color: #b9bbbe;
+}
+
+.displayNone {
+  display: none;
+}
+
+#userIsTypingDiv {
+  position: absolute;
+  top: 70%;
+  left: 2%;
+  background-color: transparent;
+}
+
+#leaveButton {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 40%;
+  border-radius: 0.6rem;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: #b9bbbe;
+  color: #2f3136;
+}
+
+#leaveButton:hover {
+  transform: scale(1.05);
+  color: white;
+  opacity: 0.2;
+}
 
 #roomContainer {
   width: 25%;
@@ -88,13 +98,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+
+#roomContainer::-webkit-scrollbar {
+  display: none;
 }
 
 #chatLink {
-  font-size: 3vmin;
+  font-size: 1.5rem;
   border-radius: 0.6rem;
   border: 0.2rem solid;
-  padding: 2vmin;
+  padding: 1rem;
   transition: 0.5s;
   list-style-type: none;
   cursor: pointer;
@@ -108,7 +125,6 @@
   filter: invert(1);
   border: 0.2rem solid #2f3136;
 }
-
 
 #chatContainer {
   width: 75%;
@@ -127,4 +143,15 @@
 
 #currentRoom {
   border: 5px yellow solid;
+}
+
+#roomNameHeader {
+  /* font-weight: normal; */
+  font-size: 1.5rem;
+}
+
+#wizcordLogo {
+  font-size: 3rem;
+  background-color: transparent;
+  text-align: center;
 }

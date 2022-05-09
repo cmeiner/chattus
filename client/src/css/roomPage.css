@@ -10,7 +10,7 @@
 
 #roomInputHeader,
 #roomListDiv {
-  font-size: 6vmin;
+  font-size: 3rem;
   margin-bottom: 0;
 }
 
@@ -22,7 +22,7 @@
 }
 
 #roomLink {
-  font-size: 3vmin;
+  font-size: 2rem;
   border-radius: 0.6rem;
   border: 0.2rem solid;
   padding: 1rem;
@@ -40,7 +40,11 @@
   text-align: center;
   padding: 0;
   display: flex;
-justify-content: center;
+  justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+}
+
+#roomNameHeader {
+  text-align: center;
 }

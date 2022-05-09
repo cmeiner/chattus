@@ -6,6 +6,14 @@ function renderMessagePage(socket: any, joinedRoom: string, user: string) {
   let roomContainer = document.createElement("div");
   roomContainer.id = "roomContainer";
 
+  let wizcordLogo = document.createElement("div");
+  wizcordLogo.id = "wizcordLogo";
+  wizcordLogo.innerText = "Wizcord 🧙‍♂️";
+
+  let roomNameHeader = document.createElement("h3");
+  roomNameHeader.id = "roomNameHeader";
+  roomNameHeader.innerText = `Talking in ${joinedRoom}!`;
+
   let leaveButton = document.createElement("button");
   leaveButton.id = "leaveButton";
   leaveButton.innerHTML = "Leave room";
@@ -13,10 +21,6 @@ function renderMessagePage(socket: any, joinedRoom: string, user: string) {
     socket.emit("leave", joinedRoom);
     renderRoomPage(socket);
   });
-
-  let chatListUl = document.createElement("ul");
-  chatListUl.id = "chatListUl";
-  roomContainer.append(chatListUl);
 
   let chatContainer = document.createElement("div");
   chatContainer.id = "chatContainer";
@@ -35,6 +39,9 @@ function renderMessagePage(socket: any, joinedRoom: string, user: string) {
     if (chatInput.value.length) {
       socket.emit("message", chatInput.value, joinedRoom);
       chatForm.reset();
+      // window.setInterval(function () {
+      chatList.scrollTop = chatList.scrollHeight;
+      // }, 10);
     } else {
       console.log("Du får inte skicka tomma meddelanden!");
     }
@@ -47,17 +54,16 @@ function renderMessagePage(socket: any, joinedRoom: string, user: string) {
     isTyping = true;
   });
 
-  
   let userIsTypingDiv = document.createElement("div");
   userIsTypingDiv.id = "userIsTypingDiv";
   chatForm.append(userIsTypingDiv);
-  
-  chatForm.addEventListener('submit', (event) => {
-    isTyping = false
-    userIsTypingDiv.innerText = ""
-  })
+
+  chatForm.addEventListener("submit", (event) => {
+    isTyping = false;
+    userIsTypingDiv.innerText = "";
+  });
   socket.on("typing", (nickname: string) => {
-    if(nickname !== user && isTyping) {      
+    if (nickname !== user && isTyping) {
       userIsTypingDiv.innerText = `${nickname} is typing...`;
     }
 
@@ -76,11 +82,11 @@ function renderMessagePage(socket: any, joinedRoom: string, user: string) {
   });
 
   let sendButton = document.createElement("button");
-  sendButton.innerText = "Skicka";
+  sendButton.innerText = "Send";
 
-  roomContainer.prepend(leaveButton);
+  roomContainer.prepend(wizcordLogo, leaveButton);
   chatForm.append(chatInput, sendButton);
-  chatContainer.append(chatForm, chatList);
+  chatContainer.append(roomNameHeader, chatForm, chatList);
   document.body.append(roomContainer, chatContainer);
 }
 

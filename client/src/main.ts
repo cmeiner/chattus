@@ -32,7 +32,7 @@ socket.on("_error", (errorMessage) => {
 let roomListDiv = document.createElement("div");
 roomListDiv.id = "roomListDiv";
 socket.on("roomList", (rooms) => {
-  renderRoomList(socket, rooms, roomListDiv, joinedRoom)
+  renderRoomList(socket, rooms, roomListDiv, joinedRoom);
 });
 
 socket.on("joined", (room) => {
@@ -54,6 +54,9 @@ socket.on("message", (message, from) => {
   }
 
   window.scrollTo(0, document.body.scrollHeight);
+  let chatList = document.getElementById("messages")!;
+
+  chatList.scrollTop = chatList.scrollHeight;
 });
 
 socket.on("connected", (userName) => {
