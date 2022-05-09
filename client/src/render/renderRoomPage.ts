@@ -2,22 +2,26 @@ function renderRoomPage(socket : any) {
     document.body.innerHTML = ""
     
     let container = document.createElement("div")
-    container.classList.add("inputNameContainer")
+    container.classList.add("inputRoomContainer")
     container.id = 'container'
   
-    let roomListUL = document.createElement('ul')
-    roomListUL.id = 'roomListUL'
+    // let roomListUL = document.createElement('ul')
+    // roomListUL.id = 'roomListUL'
     
     let roomInputHeader = document.createElement("h3")
-    roomInputHeader.innerText = "Ange ditt rum"
+    roomInputHeader.id = 'roomInputHeader'
+    roomInputHeader.innerText = "Enter your own room"
   
     let roomForm = document.createElement('form')
     roomForm.id = 'roomForm'
   
     let roomInput = document.createElement("input")
+    roomInput.id = 'nameInput'
+    roomInput.autocomplete = 'off'
   
     let roomInputButton = document.createElement("button")
-    roomInputButton.innerText = "Gå med"
+    roomInputButton.id = 'nameInputButton'
+    roomInputButton.innerText = "Enter"
     roomForm.addEventListener("submit", (e) => {
       e.preventDefault()
       const room = roomInput.value
@@ -28,7 +32,7 @@ function renderRoomPage(socket : any) {
       socket.emit("join", room) 
     })
 
-    container.append(roomListUL, roomInputHeader, roomForm)
+    container.append(roomInputHeader, roomForm)
     roomForm.append(roomInput, roomInputButton)
     document.body.append(container)
   }

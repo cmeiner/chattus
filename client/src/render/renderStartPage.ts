@@ -1,19 +1,34 @@
 function renderStartPage(socket : any) {
     document.body.innerHTML = ""
+
+    let startPageContainer = document.createElement("div")
+    startPageContainer.classList.add("startPageContainer")
   
+    let wand = document.createElement('p')
+    // wand.innerHTML = 
+
+    let title = document.createElement('h1')
+    title.innerText = 'Welcome to Wizcord!'
+    // title.innerText = `Welcome to W${asd}!`
+    title.id = 'wizcordTitle'
+
     let container = document.createElement("div")
     container.classList.add("inputNameContainer")
   
     let nameInputHeader = document.createElement("h3")
-    nameInputHeader.innerText = "Ange ditt namn"
+    nameInputHeader.id = 'nameInputHeader'
+    nameInputHeader.innerText = "Enter your nickname"
   
     let nameForm = document.createElement('form')
     nameForm.id = 'nameForm'
   
     let nameInput = document.createElement("input")
+    nameInput.id = 'nameInput'
+    nameInput.autocomplete = 'off'
   
     let nameInputButton = document.createElement("button")
-    nameInputButton.innerText = "Spara"
+    nameInputButton.id = 'nameInputButton'
+    nameInputButton.innerText = "Enter"
     
     nameForm.addEventListener("submit", (e) => {
       e.preventDefault()
@@ -21,9 +36,10 @@ function renderStartPage(socket : any) {
       socket.connect()
     })
   
+    startPageContainer.append(title, container)
     container.append(nameInputHeader, nameForm)
     nameForm.append(nameInput, nameInputButton)
-    document.body.append(container)
+    document.body.append(startPageContainer)
   }
 
 export default renderStartPage
