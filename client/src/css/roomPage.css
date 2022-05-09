@@ -1,14 +1,31 @@
 #InputRoomContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100vw;
-    gap: 1em;
-    height: 100vh;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  gap: 1em;
+  height: 100vh;
+}
 
-  #roomInputHeader {
-      font-size: 6vmin;
-      margin-bottom: 0;
-  }
+#roomInputHeader,
+#roomListDivHeader {
+  font-size: 6vmin;
+  margin-bottom: 0;
+}
+
+#roomListDivHeader {
+}
+
+#roomLink {
+  font-size: 3vmin;
+  border-radius: 0.6rem;
+  border: 0.2rem solid;
+  padding: 1rem;
+  transition: 0.5s;
+}
+
+#roomLink:hover {
+  filter: invert(1);
+  border: 0.2rem solid #2f3136;
+}

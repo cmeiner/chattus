@@ -29,7 +29,7 @@
   width: 15rem;
   height: 3rem;
   font-size: 2rem;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   border: 0.2rem solid;
   text-align: center;
 }
@@ -45,17 +45,16 @@
   width: 8rem;
   height: 3rem;
   font-size: 2.5rem;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   border: none;
   text-align: center;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
   background-color: #b9bbbe;
   color: #2f3136;
 }
 
 #nameInputButton:hover {
   transform: scale(1.05);
-  opacity: .2;
+  opacity: 0.2;
 }
-
