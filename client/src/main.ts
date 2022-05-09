@@ -5,6 +5,7 @@ import "./css/roomPage.css";
 import "./css/startPage.css";
 import "./css/style.css";
 import renderMessagePage from "./render/renderMessagePage";
+import renderRoomList from "./render/renderRoomList";
 import renderRoomPage from "./render/renderRoomPage";
 import renderStartPage from "./render/renderStartPage";
 
@@ -28,39 +29,10 @@ socket.on("connect_error", (err) => {
 socket.on("_error", (errorMessage) => {
   console.log(errorMessage);
 });
-
+let roomListDiv = document.createElement("div");
+roomListDiv.id = "roomListDiv";
 socket.on("roomList", (rooms) => {
-  if (rooms.length >= 1) {
-    let container = document.getElementById("container");
-    let roomListDivHeader = document.createElement("h3");
-    roomListDivHeader.id = "roomListDivHeader";
-    roomListDivHeader.innerText = "Join a room";
-
-    for (let room of rooms) {
-      let chatLink = document.createElement("li");
-      chatLink.id = "chatLink";
-      chatLink.innerHTML = `${room}`;
-      chatLink.addEventListener("click", () => {
-        socket.emit("leave", joinedRoom);
-        socket.emit("join", room);
-      });
-      let roomLink = document.createElement("li");
-      roomLink.id = "roomLink";
-      roomLink.innerHTML = `${room}`;
-      roomLink.addEventListener("click", () => {
-        socket.emit("join", room);
-      });
-      document.getElementById("chatListUl")?.append(chatLink);
-      document.getElementById("roomListUL")?.append(roomLink);
-    }
-    let roomListDiv = document.createElement("div");
-    roomListDiv.id = "roomListDiv";
-    roomListDiv?.prepend(roomListDivHeader);
-    let orText = document.createElement("h3");
-    orText;
-    container?.prepend(roomListDiv);
-  }
-  console.log(rooms);
+  renderRoomList(socket, rooms, roomListDiv, joinedRoom)
 });
 
 socket.on("joined", (room) => {

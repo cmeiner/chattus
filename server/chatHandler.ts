@@ -21,8 +21,13 @@ export default (io: Server, socket: Socket) => {
 
 
     socket.on('leave', (room) => {
+        const shouldBroadcastRooms: boolean = getRooms(io).includes(room)
         console.log(`${socket.data.nickname} wants to leave ${room}`)
         socket.leave(room)
+
+        if (shouldBroadcastRooms) {
+            io.emit("roomList", getRooms(io))
+        }
     })
 
     socket.on("message", (message, to) => {

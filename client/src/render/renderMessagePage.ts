@@ -1,73 +1,87 @@
-import renderRoomPage from "./renderRoomPage"
+import renderRoomPage from "./renderRoomPage";
 
-function renderMessagePage(socket : any, joinedRoom : string, nickname : string) {
-    document.body.innerHTML = ""
-  
-    let roomContainer = document.createElement("div")
-    roomContainer.id = "roomContainer"
-  
-    let leaveButton = document.createElement("button")
-    leaveButton.id = "leaveButton"
-    leaveButton.innerHTML = "Lämna rum"
-    leaveButton.addEventListener("click", () => {
-      socket.emit("leave", joinedRoom)
-      renderRoomPage(socket)
-    })
-  
-    let chatListUl = document.createElement('ul')
-    chatListUl.id = "chatListUl"
-    roomContainer.append(chatListUl)
-    
-    let chatContainer = document.createElement("div")
-    chatContainer.id = "chatContainer"
-  
-    let chatList = document.createElement("ul")
-    chatList.id = "messages"
-  
-    let chatInput = document.createElement("input")
-    chatInput.autocomplete = "off"
-    chatInput.id = "input"
-  
-    let chatForm = document.createElement("form")
-    chatForm.id = "form"
-    chatForm.addEventListener("submit", (event) => {
-      event.preventDefault()
-      if(chatInput.value.length) {
-        socket.emit("message", chatInput.value, joinedRoom)
-        chatForm.reset()
-      } else {
-        console.log("Du får inte skicka tomma meddelanden!");
-      }
-    })
-    chatForm.addEventListener("input", (event) => {
-      socket.emit("typing", `${nickname}` )
+function renderMessagePage(socket: any, joinedRoom: string, user: string) {
+  document.body.innerHTML = "";
 
-    })
+  let roomContainer = document.createElement("div");
+  roomContainer.id = "roomContainer";
 
-    let userIsTypingDiv = document.createElement("div")
-    userIsTypingDiv.id = "userIsTypingDiv"
+  let leaveButton = document.createElement("button");
+  leaveButton.id = "leaveButton";
+  leaveButton.innerHTML = "Leave room";
+  leaveButton.addEventListener("click", () => {
+    socket.emit("leave", joinedRoom);
+    renderRoomPage(socket);
+  });
 
-    let userIsTypingText = document.createElement("p")
-    userIsTypingText.id = "userIsTypingText"
-    
-    userIsTypingDiv.append(userIsTypingText)
-    
-    socket.on('typing', (nickname : string) => {
-      console.log(`${nickname} skriver`)
-      
-      userIsTypingText.innerText = `${nickname} skriver ett meddelande`
-      
-      chatForm.append(userIsTypingDiv)
+  let chatListUl = document.createElement("ul");
+  chatListUl.id = "chatListUl";
+  roomContainer.append(chatListUl);
 
-    })
-      
-    let sendButton = document.createElement("button")
-    sendButton.innerText = "Skicka"
+  let chatContainer = document.createElement("div");
+  chatContainer.id = "chatContainer";
+
+  let chatList = document.createElement("ul");
+  chatList.id = "messages";
+
+  let chatInput = document.createElement("input");
+  chatInput.autocomplete = "off";
+  chatInput.id = "input";
+
+  let chatForm = document.createElement("form");
+  chatForm.id = "form";
+  chatForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (chatInput.value.length) {
+      socket.emit("message", chatInput.value, joinedRoom);
+      chatForm.reset();
+    } else {
+      console.log("Du får inte skicka tomma meddelanden!");
+    }
+  });
+
+  let isTyping = false;
+
+  chatForm.addEventListener("keydown", (event) => {
+    socket.emit("typing", `${user}`);
+    isTyping = true;
+  });
+
   
-    roomContainer.append(leaveButton)
-    chatForm.append(chatInput, sendButton)
-    chatContainer.append(chatForm, chatList)
-    document.body.append(roomContainer, chatContainer, )
-  }
+  let userIsTypingDiv = document.createElement("div");
+  userIsTypingDiv.id = "userIsTypingDiv";
+  chatForm.append(userIsTypingDiv);
+  
+  chatForm.addEventListener('submit', (event) => {
+    isTyping = false
+    userIsTypingDiv.innerText = ""
+  })
+  socket.on("typing", (nickname: string) => {
+    if(nickname !== user && isTyping) {      
+      userIsTypingDiv.innerText = `${nickname} is typing...`;
+    }
 
-  export default renderMessagePage
+    // setTimeout(() => {
+    //   userIsTypingDiv.innerText = ""
+    // },1000)
+    // if (isTyping) {
+    //   console.log(`${nickname} skriver`);
+    //   userIsTypingDiv.innerText = `${nickname} is typing`;
+    //   isTyping = false;
+    //   console.log(isTyping)
+    // } else {
+    //   console.log('hehe')
+    //   userIsTypingDiv.innerHTML = ""
+    // }
+  });
+
+  let sendButton = document.createElement("button");
+  sendButton.innerText = "Skicka";
+
+  roomContainer.prepend(leaveButton);
+  chatForm.append(chatInput, sendButton);
+  chatContainer.append(chatForm, chatList);
+  document.body.append(roomContainer, chatContainer);
+}
+
+export default renderMessagePage;

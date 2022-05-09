@@ -5,8 +5,8 @@ function renderRoomPage(socket : any) {
     container.classList.add("inputRoomContainer")
     container.id = 'container'
   
-    let roomListUL = document.createElement('ul')
-    roomListUL.id = 'roomListUL'
+    // let roomListUL = document.createElement('ul')
+    // roomListUL.id = 'roomListUL'
     
     let roomInputHeader = document.createElement("h3")
     roomInputHeader.id = 'roomInputHeader'
@@ -32,7 +32,7 @@ function renderRoomPage(socket : any) {
       socket.emit("join", room) 
     })
 
-    container.append(roomListUL, roomInputHeader, roomForm)
+    container.append(roomInputHeader, roomForm)
     roomForm.append(roomInput, roomInputButton)
     document.body.append(container)
   }

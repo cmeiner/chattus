@@ -9,12 +9,16 @@
 }
 
 #roomInputHeader,
-#roomListDivHeader {
+#roomListDiv {
   font-size: 6vmin;
   margin-bottom: 0;
 }
 
-#roomListDivHeader {
+#roomListDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
 }
 
 #roomLink {
@@ -23,9 +27,20 @@
   border: 0.2rem solid;
   padding: 1rem;
   transition: 0.5s;
+  list-style-type: none;
 }
 
 #roomLink:hover {
   filter: invert(1);
   border: 0.2rem solid #2f3136;
+}
+
+#roomListUL {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  display: flex;
+justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }

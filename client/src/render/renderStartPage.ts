@@ -4,8 +4,12 @@ function renderStartPage(socket : any) {
     let startPageContainer = document.createElement("div")
     startPageContainer.classList.add("startPageContainer")
   
+    let wand = document.createElement('p')
+    // wand.innerHTML = 
+
     let title = document.createElement('h1')
     title.innerText = 'Welcome to Wizcord!'
+    // title.innerText = `Welcome to W${asd}!`
     title.id = 'wizcordTitle'
 
     let container = document.createElement("div")
