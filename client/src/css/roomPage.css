@@ -19,6 +19,7 @@
   flex-direction: column;
   align-items: center;
   width: 40%;
+  text-align: center;
 }
 
 #roomLink {
@@ -47,4 +48,22 @@
 
 #roomNameHeader {
   text-align: center;
+}
+
+.roomLink {
+  font-size: 1.5rem;
+  border-radius: 0.6rem;
+  border: 0.2rem solid;
+  padding: 1rem;
+  transition: 0.5s;
+  list-style-type: none;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.roomLink:hover {
+  filter: invert(1);
+  border: 0.2rem solid #2f3136;
 }

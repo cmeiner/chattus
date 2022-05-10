@@ -1,36 +1,42 @@
 import { Server, Socket } from "socket.io";
-import { ClientToServerEvents, InterServerEvents, ServerSocketData, ServerToClientEvents } from "../types";
-import registerChatHandler from './chatHandler';
+import {
+  ClientToServerEvents,
+  InterServerEvents,
+  ServerSocketData,
+  ServerToClientEvents,
+} from "../types";
+import registerChatHandler from "./chatHandler";
 import { getRooms } from "./roomStore";
 
-const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, ServerSocketData>();
+const io = new Server<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  ServerSocketData
+>();
 
 io.use((socket: Socket, next) => {
-  const nickname: string = socket.handshake.auth.nickname
-  if(!nickname || nickname.length < 3) {
-    return next(new Error("Invalid nickname"))
+  const nickname: string = socket.handshake.auth.nickname;
+  if (!nickname || nickname.length < 3) {
+    return next(new Error("Invalid nickname"));
   }
-  socket.data.nickname = nickname
-  next()
-})
+  socket.data.nickname = nickname;
+  next();
+});
 
 io.on("connection", (socket) => {
   console.log("a user connected");
 
-  if(socket.data.nickname) {
-    socket.emit("connected", socket.data.nickname)
-
+  if (socket.data.nickname) {
     // TODO: Kolla om ett nytt rum skapats, om så sker redan en io.emit till alla sockets med alla rum.
-    socket.emit("roomList", getRooms(io))
+    socket.emit("roomList", getRooms(io));
+    socket.emit("connected", socket.data.nickname);
   }
 
-  registerChatHandler(io, socket)
-  
+  registerChatHandler(io, socket);
 });
 
 io.listen(4001);
-
-
 
 /*  
 
