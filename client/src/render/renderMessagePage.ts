@@ -1,7 +1,13 @@
 import type { IOSocket } from "../main";
 import renderRoomPage from "./renderRoomPage";
+import renderSmallRoomList from "./renderSmallRoomList";
 
-function renderMessagePage(socket: IOSocket, joinedRoom: string, user: string) {
+function renderMessagePage(
+  socket: IOSocket,
+  joinedRoom: string,
+  user: string,
+  rooms: string[]
+) {
   document.body.innerHTML = "";
 
   let roomContainer = document.createElement("div");
@@ -20,7 +26,7 @@ function renderMessagePage(socket: IOSocket, joinedRoom: string, user: string) {
   leaveButton.innerHTML = "Leave room";
   leaveButton.addEventListener("click", () => {
     socket.emit("leave", joinedRoom);
-    // renderRoomPage(socket);
+    renderRoomPage(socket, rooms);
   });
 
   let chatContainer = document.createElement("div");
@@ -89,6 +95,7 @@ function renderMessagePage(socket: IOSocket, joinedRoom: string, user: string) {
   chatForm.append(chatInput, sendButton);
   chatContainer.append(roomNameHeader, chatForm, chatList);
   document.body.append(roomContainer, chatContainer);
+  renderSmallRoomList(socket, rooms);
 }
 
 export default renderMessagePage;

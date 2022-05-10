@@ -1,22 +1,26 @@
 import { IOSocket } from "../main";
+import renderRoomPage from "../render/renderRoomPage";
 
 function createRoomItem(
   socket: IOSocket,
   room: string,
-  className: string,
+  id: string,
+  rooms: string[],
   joinedRoom?: string
 ) {
-  let roomLink = document.createElement("li");
-  roomLink.className = className;
-  roomLink.innerHTML = `${room}`;
-  roomLink.addEventListener("click", () => {
+  let roomListItem = document.createElement("li");
+  roomListItem.id = id;
+  roomListItem.innerHTML = `${room}`;
+  roomListItem.addEventListener("click", () => {
     if (joinedRoom) {
+      console.log("finns rum", joinedRoom);
       socket.emit("leave", joinedRoom);
+      renderRoomPage(socket, rooms);
     }
     socket.emit("join", room);
   });
 
-  return roomLink;
+  return roomListItem;
 }
 
 export default createRoomItem;

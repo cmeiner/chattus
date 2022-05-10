@@ -41,13 +41,14 @@ socket.on("roomList", (rooms) => {
   chatRooms = rooms;
   console.log(rooms);
   renderLargeRoomList(socket, rooms);
+  renderSmallRoomList(socket, rooms, joinedRoom);
 });
 
 socket.on("joined", (room) => {
   console.log("Joined room: ", room);
   joinedRoom = room;
-  renderMessagePage(socket, joinedRoom, nickname);
-  renderSmallRoomList(socket, chatRooms, roomListDiv, joinedRoom);
+  renderMessagePage(socket, joinedRoom, nickname, chatRooms);
+  // renderSmallRoomList(socket, chatRooms);
 });
 
 socket.on("message", (message, from) => {

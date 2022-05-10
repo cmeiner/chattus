@@ -5,7 +5,6 @@ function renderRoomPage(socket: any, rooms: string[]) {
   document.body.innerHTML = "";
 
   let container = document.createElement("div");
-  container.classList.add("inputRoomContainer");
   container.id = "container";
 
   let roomInputHeader = document.createElement("h3");

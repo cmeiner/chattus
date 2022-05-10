@@ -159,3 +159,9 @@
 #chatRoomList {
   margin-bottom: 1rem;
 }
+
+#smallRoomListContainer {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}

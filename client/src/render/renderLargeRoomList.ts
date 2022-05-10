@@ -15,7 +15,7 @@ function renderLargeRoomList(socket: IOSocket, rooms: string[]) {
     joinRoomTitle.innerText = "Join an existing room";
 
     for (let room of rooms) {
-      let listItem = createRoomItem(socket, room, "test");
+      let listItem = createRoomItem(socket, room, "roomListItem", rooms);
       largeRoomList.append(listItem);
     }
   }

@@ -2,7 +2,7 @@ function renderStartPage(socket: any) {
   document.body.innerHTML = "";
 
   let startPageContainer = document.createElement("div");
-  startPageContainer.classList.add("startPageContainer");
+  startPageContainer.id = "startPageContainer";
 
   let wand = document.createElement("p");
   wand.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i>`;
@@ -13,7 +13,7 @@ function renderStartPage(socket: any) {
   title.id = "wizcordTitle";
 
   let container = document.createElement("div");
-  container.classList.add("inputNameContainer");
+  container.id = "inputNameContainer";
 
   let nameInputHeader = document.createElement("h3");
   nameInputHeader.id = "nameInputHeader";
