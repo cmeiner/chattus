@@ -1,4 +1,4 @@
-.startPageContainer {
+#startPageContainer {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.inputNameContainer {
+#inputNameContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +19,7 @@
 #wizcordTitle {
   font-size: 5rem;
   margin: 0;
+  text-align: center;
 }
 
 #nameInputHeader {

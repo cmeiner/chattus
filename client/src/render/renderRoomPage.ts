@@ -1,12 +1,11 @@
-function renderRoomPage(socket: any) {
+import renderLargeRoomList from "./renderLargeRoomList";
+
+function renderRoomPage(socket: any, rooms: string[]) {
+  console.log(rooms);
   document.body.innerHTML = "";
 
   let container = document.createElement("div");
-  container.classList.add("inputRoomContainer");
   container.id = "container";
-
-  // let roomListUL = document.createElement('ul')
-  // roomListUL.id = 'roomListUL'
 
   let roomInputHeader = document.createElement("h3");
   roomInputHeader.id = "roomInputHeader";
@@ -35,6 +34,7 @@ function renderRoomPage(socket: any) {
   container.append(roomInputHeader, roomForm);
   roomForm.append(roomInput, roomInputButton);
   document.body.append(container);
+  renderLargeRoomList(socket, rooms);
 }
 
 export default renderRoomPage;

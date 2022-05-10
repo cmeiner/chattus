@@ -1,4 +1,4 @@
-#InputRoomContainer {
+#container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,9 +19,10 @@
   flex-direction: column;
   align-items: center;
   width: 40%;
+  text-align: center;
 }
 
-#roomLink {
+#roomListItem {
   font-size: 2rem;
   border-radius: 0.6rem;
   border: 0.2rem solid;
@@ -30,12 +31,12 @@
   list-style-type: none;
 }
 
-#roomLink:hover {
+#roomListItem:hover {
   filter: invert(1);
   border: 0.2rem solid #2f3136;
 }
 
-#roomListUL {
+#largeRoomList {
   list-style-type: none;
   text-align: center;
   padding: 0;
@@ -47,4 +48,26 @@
 
 #roomNameHeader {
   text-align: center;
+}
+
+#roomListItem {
+  font-size: 1.5rem;
+  border-radius: 0.6rem;
+  border: 0.2rem solid;
+  padding: 1rem;
+  transition: 0.5s;
+  list-style-type: none;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+#smallRoomList {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 0;
 }

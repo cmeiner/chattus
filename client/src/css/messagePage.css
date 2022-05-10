@@ -69,7 +69,7 @@
 }
 
 #leaveButton {
-  margin-top: 1rem;
+  margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,4 +154,14 @@
   font-size: 3rem;
   background-color: transparent;
   text-align: center;
+}
+
+#chatRoomList {
+  margin-bottom: 1rem;
+}
+
+#smallRoomListContainer {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
 }

@@ -5,7 +5,8 @@ import "./css/roomPage.css";
 import "./css/startPage.css";
 import "./css/style.css";
 import renderMessagePage from "./render/renderMessagePage";
-import renderRoomList from "./render/renderRoomList";
+import renderSmallRoomList from "./render/renderSmallRoomList";
+import renderLargeRoomList from "./render/renderLargeRoomList";
 import renderRoomPage from "./render/renderRoomPage";
 import renderStartPage from "./render/renderStartPage";
 
@@ -13,8 +14,11 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({
   autoConnect: false,
 });
 
+export type IOSocket = typeof socket;
+
 let nickname: string;
 let joinedRoom: string;
+let chatRooms: string[];
 
 window.addEventListener("load", () => {
   renderStartPage(socket);
@@ -29,16 +33,22 @@ socket.on("connect_error", (err) => {
 socket.on("_error", (errorMessage) => {
   console.log(errorMessage);
 });
+
 let roomListDiv = document.createElement("div");
 roomListDiv.id = "roomListDiv";
+
 socket.on("roomList", (rooms) => {
-  renderRoomList(socket, rooms, roomListDiv, joinedRoom);
+  chatRooms = rooms;
+  console.log(rooms);
+  renderLargeRoomList(socket, rooms);
+  renderSmallRoomList(socket, rooms, joinedRoom);
 });
 
 socket.on("joined", (room) => {
   console.log("Joined room: ", room);
   joinedRoom = room;
-  renderMessagePage(socket, joinedRoom, nickname);
+  renderMessagePage(socket, joinedRoom, nickname, chatRooms);
+  // renderSmallRoomList(socket, chatRooms);
 });
 
 socket.on("message", (message, from) => {
@@ -60,15 +70,7 @@ socket.on("message", (message, from) => {
 });
 
 socket.on("connected", (userName) => {
-  console.log("Connected: ", userName);
+  console.log(`Connected as user: ${userName}.`);
   nickname = userName;
-  renderRoomPage(socket);
+  renderRoomPage(socket, chatRooms);
 });
-
-// socket.on("connect", () => {
-//   console.log("Inbyggd event för connect (här skickas ingen data med)")
-// })
-
-// socket.on("disconnect", (reason, description) => {
-//   console.log("Inbyggd event för disconnect (här skickas anledning och beskrivning med)")
-// })
