@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
 
 io.of("/").adapter.on("create-room", (room) => {
   console.log("ROOM CREATED", room);
+  console.log(getRooms(io));
   io.emit("roomList", getRooms(io));
 });
 io.of("/").adapter.on("delete-room", (room) => {
@@ -45,10 +46,10 @@ io.of("/").adapter.on("delete-room", (room) => {
   io.emit("roomList", getRooms(io));
 });
 // io.of("/").adapter.on("join-room", (room, id) => {
-//   // io.emit("roomList", getRooms(io));
+//   io.emit("roomList", getRooms(io));
 // });
 // io.of("/").adapter.on("leave-room", (room, id) => {
-//   // io.emit("roomList", getRooms(io));
+//   io.emit("roomList", getRooms(io));
 // });
 
 io.listen(4001);

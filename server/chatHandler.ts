@@ -3,9 +3,9 @@ import { getRooms } from "./roomStore";
 
 export default (io: Server, socket: Socket) => {
   socket.on("join", (room) => {
+    socket.emit("joined", room);
     socket.join(room);
     console.log(`${socket.data.nickname} joined ${room}`);
-    socket.emit("joined", room);
   });
 
   socket.on("leave", (room) => {

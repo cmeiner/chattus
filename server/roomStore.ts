@@ -5,12 +5,10 @@ import { Server } from "socket.io";
 export function getRooms(io: Server) {
   const rooms = [];
   // console.log(io.sockets.adapter.rooms)
-  for (let [id, socket] of io.sockets.adapter.rooms) {
-    if (!socket.has(id)) {
-      if (socket.size > 0) {
-        rooms.push(id);
-        console.log(rooms);
-      }
+  for (let [id, sockets] of io.sockets.adapter.rooms) {
+    if (!io.sockets.sockets.has(id)) {
+      rooms.push(id);
+      console.log(rooms);
     }
   }
   return rooms;
