@@ -1,11 +1,14 @@
 import renderLargeRoomList from "./renderLargeRoomList";
 
 function renderRoomPage(socket: any, rooms: string[]) {
-  console.log(rooms);
   document.body.innerHTML = "";
 
   let container = document.createElement("div");
   container.id = "container";
+
+  let errorMessage = document.createElement("h4");
+  errorMessage.id = "errorMessage";
+  errorMessage.innerText = " ";
 
   let roomInputHeader = document.createElement("h3");
   roomInputHeader.id = "roomInputHeader";
@@ -25,14 +28,17 @@ function renderRoomPage(socket: any, rooms: string[]) {
     e.preventDefault();
     const room = roomInput.value;
     if (!room.length) {
-      console.log("Ogiltigt namn på rum...");
+      errorMessage.innerHTML = "Please enter a room name!";
+      setTimeout(() => {
+        errorMessage.innerHTML = " ";
+      }, 2000);
       return;
     }
     socket.emit("join", room);
   });
 
   container.append(roomInputHeader, roomForm);
-  roomForm.append(roomInput, roomInputButton);
+  roomForm.append(roomInput, errorMessage, roomInputButton);
   document.body.append(container);
   renderLargeRoomList(socket, rooms);
 }

@@ -13,7 +13,6 @@ function createRoomItem(
   roomListItem.innerHTML = `${room}`;
   roomListItem.addEventListener("click", () => {
     if (joinedRoom) {
-      console.log("finns rum", joinedRoom);
       socket.emit("leave", joinedRoom);
       renderRoomPage(socket, rooms);
     }

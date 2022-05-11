@@ -25,8 +25,13 @@ window.addEventListener("load", () => {
 });
 
 socket.on("connect_error", (err) => {
+  let errorMessage: any = document.getElementById("errorMessage");
   if (err.message == "Invalid nickname") {
-    console.log("Du angav ett ogiltigt användarnamn, var god försök igen...");
+    errorMessage.innerHTML = "Username has to be atleast 2 characters";
+
+    setTimeout(() => {
+      errorMessage.innerHTML = " ";
+    }, 2000);
   }
 });
 
@@ -39,21 +44,16 @@ roomListDiv.id = "roomListDiv";
 
 socket.on("roomList", (rooms) => {
   chatRooms = rooms;
-  console.log(rooms);
   renderLargeRoomList(socket, rooms);
   renderSmallRoomList(socket, rooms, joinedRoom);
 });
 
 socket.on("joined", (room) => {
-  console.log("Joined room: ", room);
   joinedRoom = room;
   renderMessagePage(socket, joinedRoom, nickname, chatRooms);
-  // renderSmallRoomList(socket, chatRooms);
 });
 
 socket.on("message", (message, from) => {
-  console.log(message, from.nickname);
-
   const chatItem = document.createElement("li");
   chatItem.textContent = from.nickname + ": " + message;
 
@@ -70,7 +70,6 @@ socket.on("message", (message, from) => {
 });
 
 socket.on("connected", (userName) => {
-  console.log(`Connected as user: ${userName}.`);
   nickname = userName;
   renderRoomPage(socket, chatRooms);
 });

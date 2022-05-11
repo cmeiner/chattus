@@ -1,56 +1,20 @@
-
-[X]
-1.Användaren får börja med att välja ett eget visningsnamn när den besöker sidan.
-
-2.Det ska gå att skapa ett rum (och samtidigt gå med i rummet).
-[X]
-
-3.Det ska gå att lämna ett rum (tomma rum ska automatiskt försvinna).
-[X]
-
-4.Samtliga rum skall vara synligt i en lista.
-[Funkar halvbra]
-
-5.De går att gå med i ett rum genom att klicka på det i listan.
-[X]
-
-6.När en användare går med i ett nytt rum ska befintligt rum lämnas automatiskt.
-[]
-
-7.Användare ska kunna skicka och läsa nya meddelanden i rummet de har gått med i
-[]
-
-8.När en användare håller på att skriva ett meddelande skall det synas för alla andra i rummet.
-
-
-
-
-
-# Socket.io with Typescript
+# Wizcord 🧙‍♂️ - a socket.io chat using TypeScript and Vite
 
 ## Install & Run
 
-Will run both client and server in parallel
+First of all you need to install all the dependencies. You do this by typing `npm i` in the terminal.
 
-1. `npm install`
-2. `npm start`
+After the install has completed you type `npm start` in the terminal to start the application.
 
-### Installation in two tabs
+A live server will automatically connect on port 3001 where you will be able to view the site.
 
-Open two terminals and run the following commands
+If you dont know what to do, just open your browser (works best in chrome) and go to: http://localhost:3001/
 
-1. `npm run client-install`
-2. `npm run server-install`
+Enjoy!
 
-### Run project in two tabs
+---
 
-Open two terminals and run the following commands
-
-1. `npm run client`
-2. `npm run server`
-
-### Remove node_modules
-
-Run the follow command to remove all three node_modules folders
-
-- `npm run rm-node-modules`.
+Created by:
+[Felix "geten" Bakkum](https://github.com/FrontFelix),
+[Christian Meiner](https://github.com/miMeiner) &
+[Adam Hepsever](https://github.com/AdaHep).

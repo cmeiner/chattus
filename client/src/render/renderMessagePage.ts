@@ -46,11 +46,7 @@ function renderMessagePage(
     if (chatInput.value.length) {
       socket.emit("message", chatInput.value, joinedRoom);
       chatForm.reset();
-      // window.setInterval(function () {
       chatList.scrollTop = chatList.scrollHeight;
-      // }, 10);
-    } else {
-      console.log("Du får inte skicka tomma meddelanden!");
     }
   });
 
@@ -58,10 +54,13 @@ function renderMessagePage(
     socket.emit("isTyping", user, joinedRoom);
   });
 
+  let timer: any;
+
   chatForm.addEventListener("keyup", () => {
-    setTimeout(() => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
       socket.emit("isNotTyping", joinedRoom);
-    }, 1500);
+    }, 500);
   });
 
   chatForm.addEventListener("submit", () => {
@@ -73,7 +72,7 @@ function renderMessagePage(
   chatForm.append(userIsTypingDiv);
 
   socket.on("isTyping", (nickname, room) => {
-    userIsTypingDiv.innerText = `${nickname} is typing`;
+    userIsTypingDiv.innerText = `${nickname} is typing...`;
   });
 
   socket.on("isNotTyping", () => {

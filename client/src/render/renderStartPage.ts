@@ -4,13 +4,13 @@ function renderStartPage(socket: any) {
   let startPageContainer = document.createElement("div");
   startPageContainer.id = "startPageContainer";
 
-  let wand = document.createElement("p");
-  wand.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i>`;
-
   let title = document.createElement("h1");
   title.innerText = "Welcome to Wizcord! 🧙‍♂️";
-  // title.innerText = `Welcome to W${wand}!`;
   title.id = "wizcordTitle";
+
+  let errorMessage = document.createElement("h4");
+  errorMessage.id = "errorMessage";
+  errorMessage.innerText = " ";
 
   let container = document.createElement("div");
   container.id = "inputNameContainer";
@@ -38,7 +38,7 @@ function renderStartPage(socket: any) {
 
   startPageContainer.append(title, container);
   container.append(nameInputHeader, nameForm);
-  nameForm.append(nameInput, nameInputButton);
+  nameForm.append(nameInput, errorMessage, nameInputButton);
   document.body.append(startPageContainer);
 }
 

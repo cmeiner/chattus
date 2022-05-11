@@ -18,7 +18,7 @@
   padding: 0 1rem;
   font-size: 2rem;
   flex-grow: 1;
-  border-radius: 2rem;
+  border-radius: 0.6rem;
   margin: 0.25rem;
   height: 60%;
 }
@@ -30,10 +30,10 @@
 #form > button {
   background: #333;
   border: none;
-  height: 3rem;
+  height: 60%;
   padding: 0 1rem;
   margin: 0.25rem;
-  border-radius: 3px;
+  border-radius: 0.6rem;
   outline: none;
   color: #b9bbbe;
   font-size: 1.5rem;
@@ -52,7 +52,6 @@
 }
 
 #messages > li:nth-child(odd) {
-  /* background: rgb(110, 174, 226);*/
   background-color: #32353b;
   color: #b9bbbe;
 }
@@ -146,7 +145,6 @@
 }
 
 #roomNameHeader {
-  /* font-weight: normal; */
   font-size: 1.5rem;
 }
 

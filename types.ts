@@ -4,7 +4,6 @@ export interface ServerToClientEvents {
   roomList: (rooms: string[]) => void;
   joined: (room: string) => void;
   _error: (errorMessage: string) => void;
-  // type: (nickname: string, room: string) => void;
   isTyping: (nickname: string, to: string) => void;
   isNotTyping: (to: string) => void;
 }
