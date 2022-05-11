@@ -14,6 +14,10 @@
   margin-bottom: 0;
 }
 
+#largeRoomListContainer {
+  font-size: 3rem;
+}
+
 #roomListDiv {
   display: flex;
   flex-direction: column;

@@ -13,7 +13,6 @@ function renderLargeRoomList(socket: IOSocket, rooms: string[]) {
 
   if (rooms.length >= 1) {
     joinRoomTitle.innerText = "Join an existing room";
-
     for (let room of rooms) {
       let listItem = createRoomItem(socket, room, "roomListItem", rooms);
       largeRoomList.append(listItem);
@@ -26,7 +25,7 @@ function renderLargeRoomList(socket: IOSocket, rooms: string[]) {
     roomListContainer.innerHTML = ``;
     roomListContainer.append(largeRoomList);
   } else {
-    largeRoomListContainer.append(largeRoomList);
+    largeRoomListContainer.append(joinRoomTitle, largeRoomList);
     let container = document.getElementById("container");
     container?.prepend(largeRoomListContainer);
   }

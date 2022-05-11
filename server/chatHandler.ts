@@ -5,17 +5,13 @@ export default (io: Server, socket: Socket) => {
   socket.on("join", (room) => {
     socket.emit("joined", room);
     socket.join(room);
-    console.log(`${socket.data.nickname} joined ${room}`);
   });
 
   socket.on("leave", (room) => {
-    console.log(`${socket.data.nickname} wants to leave ${room}`);
     socket.leave(room);
   });
 
   socket.on("message", (message, to) => {
-    console.log(message); // här
-
     if (!socket.data.nickname) {
       return socket.emit("_error", "Missing nickname on socket..");
     }
@@ -26,7 +22,11 @@ export default (io: Server, socket: Socket) => {
     });
   });
 
-  socket.on("typing", (to) => {
-    socket.broadcast.to("room").emit("typing", socket.data.nickname);
+  socket.on("isTyping", (nickname, to) => {
+    socket.to(to).emit("isTyping", nickname, to);
+  });
+
+  socket.on("isNotTyping", (to) => {
+    socket.to(to).emit("isNotTyping", to);
   });
 };
