@@ -27,8 +27,10 @@ export default (io: Server, socket: Socket) => {
   });
 
   socket.on("isTyping", (nickname, to) => {
-    socket.broadcast.to("room").emit("typing", socket.data.nickname);
+    socket.to(to).emit("isTyping", nickname, to);
   });
 
-  socket.on("isNotTyping", (to) => {});
+  socket.on("isNotTyping", (to) => {
+    socket.to(to).emit("isNotTyping", to);
+  });
 };

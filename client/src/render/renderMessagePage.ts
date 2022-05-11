@@ -54,38 +54,30 @@ function renderMessagePage(
     }
   });
 
-  let isTyping = false;
+  chatForm.addEventListener("keydown", () => {
+    socket.emit("isTyping", user, joinedRoom);
+  });
 
-  chatForm.addEventListener("keydown", (event) => {
-    socket.emit("typing", `${user}`);
-    // isTyping = true;
+  chatForm.addEventListener("keyup", () => {
+    setTimeout(() => {
+      socket.emit("isNotTyping", joinedRoom);
+    }, 1500);
+  });
+
+  chatForm.addEventListener("submit", () => {
+    socket.emit("isNotTyping", joinedRoom);
   });
 
   let userIsTypingDiv = document.createElement("div");
   userIsTypingDiv.id = "userIsTypingDiv";
   chatForm.append(userIsTypingDiv);
 
-  chatForm.addEventListener("submit", (event) => {
-    isTyping = false;
-    userIsTypingDiv.innerText = "";
+  socket.on("isTyping", (nickname, room) => {
+    userIsTypingDiv.innerText = `${nickname} is typing`;
   });
-  socket.on("typing", (nickname: string) => {
-    if (nickname !== user && isTyping) {
-      userIsTypingDiv.innerText = `${nickname} is typing...`;
-    }
 
-    // setTimeout(() => {
-    //   userIsTypingDiv.innerText = ""
-    // },1000)
-    // if (isTyping) {
-    //   console.log(`${nickname} skriver`);
-    //   userIsTypingDiv.innerText = `${nickname} is typing`;
-    //   isTyping = false;
-    //   console.log(isTyping)
-    // } else {
-    //   console.log('hehe')
-    //   userIsTypingDiv.innerHTML = ""
-    // }
+  socket.on("isNotTyping", () => {
+    userIsTypingDiv.innerText = "";
   });
 
   let sendButton = document.createElement("button");
@@ -95,7 +87,7 @@ function renderMessagePage(
   chatForm.append(chatInput, sendButton);
   chatContainer.append(roomNameHeader, chatForm, chatList);
   document.body.append(roomContainer, chatContainer);
-  renderSmallRoomList(socket, rooms);
+  renderSmallRoomList(socket, rooms, joinedRoom);
 }
 
 export default renderMessagePage;
